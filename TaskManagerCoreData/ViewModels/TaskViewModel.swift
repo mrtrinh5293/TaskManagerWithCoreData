@@ -10,13 +10,13 @@ import SwiftUI
 class TaskViewModel: ObservableObject {
     
     @Published var storedTasks: [Task] = [
-        Task(taskTitle: "Meeting 1", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641645497)),
-        Task(taskTitle: "Meeting 2", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1415637900)),
-        Task(taskTitle: "Meeting 3", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641646397)),
-        Task(taskTitle: "Meeting 4", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641641897)),
-        Task(taskTitle: "Meeting 5", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641647897)),
-        Task(taskTitle: "Meeting 6", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641641293)),
-        Task(taskTitle: "Meeting 7", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1641649567)),        
+        Task(taskTitle: "Meeting 1", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690586)),
+        Task(taskTitle: "Meeting 2", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690486)),
+        Task(taskTitle: "Meeting 3", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642691286)),
+        Task(taskTitle: "Meeting 4", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690686)),
+        Task(taskTitle: "Meeting 5", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690686)),
+        Task(taskTitle: "Meeting 6", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690686)),
+        Task(taskTitle: "Meeting 7", taskDescription: "Discus team task for the day", taskDate: .init(timeIntervalSince1970: 1642690186)),        
     ]
     
     // Curren Week Days

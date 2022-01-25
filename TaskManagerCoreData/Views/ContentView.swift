@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @StateObject var taskModel : TaskViewModel = TaskViewModel()
     @Namespace var animation
+//    @State var time = NSDate().timeIntervalSince1970
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -67,17 +68,14 @@ struct ContentView: View {
                 } header: {
                     HeaderView()
                 }
-                
             }
         }
+        .ignoresSafeArea(.container, edges: .top)
+//        .onAppear {
+//            print(time)
+//        }
     }
-    
-    // MARK: Task Card View
-    func TaskCardView(task: Task) -> some View {
-        HStack {
-            Text(task.taskTitle)
-        }
-    }
+
     
     // MARK: Task View
     
@@ -100,10 +98,76 @@ struct ContentView: View {
                     .offset(y: 100)
             }
         }
+        .padding()
+        .padding(.top)
         //MARK: updaing Tasks
         .onChange(of: taskModel.currentDate) { newValue in
             taskModel.filterTodayTask()
         }
+    }
+    
+    // MARK: Task Card View
+    func TaskCardView(task: Task) -> some View {
+        HStack {
+            VStack(spacing: 10) {
+                Circle()
+                    .fill(.black)
+                    .frame(width: 15, height: 15)
+                    .background(
+                        Circle()
+                            .stroke(.black,lineWidth: 1)
+                            .padding(-3)
+                    )
+                
+                Rectangle()
+                    .fill(.black)
+                    .frame(width: 3)
+            }
+            
+            
+            VStack {
+                HStack(alignment: .top, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(task.taskTitle)
+                            .font(.title2.bold())
+                        
+                        Text(task.taskDescription)
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                    }
+                    .hLeading()
+                    
+                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
+                }
+                
+//                HStack(spacing: 0) {
+//                    HStack(spacing: -10) {
+//                        ForEach
+//                    }
+//                }
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "checkmark")
+                        .foregroundStyle(.black)
+                        .padding(10)
+                        .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
+                }
+                .hTrailing()
+
+//                if taskModel.is
+                
+            }
+            .foregroundColor(.white)
+            .padding()
+            .hLeading()
+            .background(
+                Color.black.opacity(0.9)
+                    .cornerRadius(25)
+            )
+        }
+        .hLeading()
     }
     
     func HeaderView() -> some View {
@@ -131,6 +195,7 @@ struct ContentView: View {
 
         }
         .padding()
+        .padding(.top, getSafeArea().top)
         .background(Color.white)
     }
 }
@@ -155,6 +220,30 @@ extension View {
     
     func hCenter() -> some View {
         self.frame(maxWidth: .infinity, alignment: .center)
+    }
+    
+    // MARK: Safe Area
+    
+    func getSafeArea() -> UIEdgeInsets {
+        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return .zero
+        }
+        
+        guard let safeArea = screen.windows.first?.safeAreaInsets else {
+            return .zero
+        }
+        
+        return safeArea
+    }
+    
+    //MARK: check if curren hour is taskHour
+    func isCUrrentHour(date: Date) -> Bool {
+        let calendar = Calendar.current
+        
+        let hour = calendar.component(.hour, from: date)
+        let currentHour = calendar.component(.hour, from: Date())
+        
+        return hour == currentHour
     }
     
 }
